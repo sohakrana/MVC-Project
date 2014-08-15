@@ -1,0 +1,27 @@
+﻿@model IEnumerable<UniversityManagementSystemApp.Models.TeacherCourseAssign>
+
+@{
+    ViewBag.Title = "ViewCourseStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewCourseStatus</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownList("DepartmentId", String.Empty)
+}
+
+<div id="coursesStatusData">
+    @Html.Partial("~/Views/Shared/_ViewCourseStatus.cshtml", Model)
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        alert("ok");
+        $("#DepartmentId").change(function () {
+            var id = $("#DepartmentId").val();
+            $("#coursesStatusData").load("TeacherCourseAssign/FilterByDepartment", { departmentId: id });
+        });
+    });
+</script>
